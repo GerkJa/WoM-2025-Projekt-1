@@ -8,7 +8,7 @@
 </head>
 <body>
   <main class="card" role="main" aria-labelledby="loginHeading">
-    <h1 id="loginHeading">Sign in to NotesApp</h1>
+    <h1 id="loginHeading">NotesApp - Sign up</h1>
 
     <form id="loginForm" novalidate>
       <div class="field">
@@ -21,16 +21,26 @@
         <input id="password" name="password" type="password" required placeholder="••••••••" />
         <button type="button" class="toggle-btn" id="togglePassword">Show</button>
       </div>
+      <div class="field password-row">
+        <label for="password">Confirm Password</label>
+        <input id="password" name="password" type="password" required placeholder="••••••••" />
+        <button type="button" class="toggle-btn" id="togglePassword">Show</button>
+      </div>
 
       <div>
+        <label>
+          <input type="checkbox" name="terms">
+            I have read the terms of agreement
+        </label>
         <div class="bottom-row">
-        <button id="submitBtn" type="submit">Sign in</button>
-            <a id="newAcc" href="../Register/index.html">New account?</a>
+        <button id="submitBtn" type="submit">Register
+        </button>
+            <a id="newAcc" href="../Login/index.html">Login here</a>
         </div>
         <div id="error" class="error" style="display:none"></div>
       </div>
     </form>
 
-  <script src="./script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -72,7 +72,18 @@ button[disabled] { opacity: .6; cursor: default; }
   color: var(--muted);
   cursor: pointer;
 }
-.newAcc {
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+#newAcc {
     text-align: end;
+    align-self: end;
+    cursor: pointer;
+    color: #2563eb;
+    text-decoration: none;
+}
+#newAcc:hover {
+  color: #153d91;
 }
 .alt { display: flex; gap: 8px; }

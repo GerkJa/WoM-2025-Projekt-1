@@ -48,3 +48,6 @@ JWT ska skickas i en authorization-header enligt regler
 # Projekt layout
 Frontend i denna katalog
 API I render?
+
+## App-frontend
+Board: [name] - selectdropdown
