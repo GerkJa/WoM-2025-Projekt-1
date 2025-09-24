@@ -51,3 +51,15 @@ API I render?
 
 ## App-frontend
 Board: [name] - selectdropdown
+    - Kan välja vilken board man ska jobba med
+New Note
+    - Skapa en ny note på current board
+Note
+    - byta färg på lappen --- Check
+    - skriva på lappen --- Check
+    - flytta på lappen --- Check
+    - order, senaste select = högsta layer -- Fix later?
+    - delete lappen med confirm delete? --- Check
+
+Extra:
+    Rita på bakgrunden? tex pilar?

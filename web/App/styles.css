@@ -1,0 +1,109 @@
+:root {
+  --bg:#eef2f6;
+  --card:#ffffff;
+  --accent:#2563eb;
+  --muted:#6b7280;
+  --danger:#dc2626;
+}
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--bg), #f7fafc);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#top-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    border-bottom: solid rgb(133, 133, 133) 1px ;
+}
+
+#select-board {
+    padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+}
+
+#new-note-btn {
+    margin-right: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+}
+
+ #whiteboard {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 50px);
+      overflow: hidden;
+    }
+
+    .note {
+      position: fixed;
+      width: 105px;
+      min-height: 100px;
+      background: #fffa87;
+      padding: 8px;
+      padding-top: 0px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      cursor: move;
+      z-index: '';
+    }
+    .note-top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .note button {
+        margin: 0px;
+        margin-top: 2px;
+        position: absolute;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        border: solid rgb(155, 155, 155) 1px;
+    }
+    .note-delete-button {
+        background-color:#dc2626
+    }
+
+    .yellow {
+        background-color: #fffa87;
+    }
+    .blue {
+        background-color: rgb(23, 122, 234);
+    }
+    .green {
+        background-color: #35eb3b;
+    }
+    .pink {
+        background-color: rgb(222, 83, 192);
+    }
+
+    .note textarea {
+      width: 98px;
+      height: 98px;
+      border: none;
+      background: transparent;
+      size: 100%;
+      resize: none;
+      outline: none;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .note button {
+        position: relative;
+    }
