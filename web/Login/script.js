@@ -12,7 +12,7 @@ toggleBtn.addEventListener('click', () => {
   toggleBtn.textContent = shown ? 'Show' : 'Hide';
 });
 
-// Simple client-side validation
+// Simple client-side validation for email/pass
 function validate() {
   errorEl.style.display = 'none';
   errorEl.textContent = '';
@@ -37,7 +37,7 @@ form.addEventListener('submit', async (ev) => {
 
   // Connect api here and recieve valid JWT
   try {
-    const resp = await fetch('/api/login', {
+    const resp = await fetch('http://localhost:8080/users/login', { //Temp Localhost link
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -47,14 +47,14 @@ form.addEventListener('submit', async (ev) => {
     });
 
     if (!resp.ok) {
-      console.log(resp.json()) // LOG ERRORS, REMOVE--
       const body = await resp.json().catch(() => ({ message: 'Unknown error' }));
-      throw new Error(body.message || 'Login failed');
+      console.log(body) // LOG ERRORS, REMOVE--
+      throw new Error(body.message || body.msg);
     }
 
     const data = await resp.json();
     if (data.token) localStorage.setItem('token', data.token);
-    window.location.href = '/app';
+    window.location.href = '../App/index.html';
   } catch (e) {
     errorEl.style.display = 'block';
     errorEl.textContent = e.message || 'Login failed';

@@ -1,8 +1,14 @@
 const board = document.getElementById('whiteboard');
 const addNoteBtn = document.getElementById('new-note-btn')
 
+//-- Useful functions
 function generateUniqueId(e) { // Unique ID for elements so they dont clash?
     return e + "_" + Date.now() + "_" + Math.floor(Math.random() * 1000)
+}
+
+function logOut() {
+    localStorage.clear();
+    window.location.reload();
 }
 
 //-- Save Notes to current board (API)
