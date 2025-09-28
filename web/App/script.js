@@ -54,7 +54,7 @@ function loadNote(noteData) {
   colorBtn.addEventListener("click", (e) => {
       const btn = e.currentTarget;
       const thisNote = btn.closest(".note");
-      const colors = ["yellow", "blue", "green", "pink"];
+      const colors = ["yellow", "blue", "green", "pink"]; 
       let next = (colors.indexOf(btn.className) + 1) % colors.length;
       btn.className = colors[next];
       thisNote.style.backgroundColor = window.getComputedStyle(btn).backgroundColor;
@@ -64,8 +64,7 @@ function loadNote(noteData) {
     delBtn.className = "note-delete-button";
     btnArea.appendChild(delBtn);
     delBtn.addEventListener("click", async (e) => {
-      
-      const thisNote = e.currentTarget.parentElement.parentElement;
+      const thisNote = e.currentTarget.parentElement.parentElement; //parent element of parent = note :D
       await fetch(`${API_URL}notes/${thisNote.id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
@@ -134,6 +133,7 @@ function generateUniqueId(e) { // Unique ID for elements so they dont clash?
 }
 
 //-- Switch board with selector, New Board logic, use above
+// No time for this sorry
 
 //----- Note and buttons logic
     function addNote() {
@@ -165,8 +165,12 @@ function generateUniqueId(e) { // Unique ID for elements so they dont clash?
         delBtn.className = 'note-delete-button';
         btnArea.appendChild(delBtn);
         delBtn.addEventListener('click', async (e) => {
-            btn = e.currentTarget;
-            //-- ADD DB Removal here----------------
+            //-- ADD DB Removal here--- Same as in load(), should work?
+            const thisNote = e.currentTarget.parentElement.parentElement;
+            await fetch(`${API_URL}notes/${thisNote.id}`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` }
+      });
             btn.parentElement.parentElement.remove();
             });
 
