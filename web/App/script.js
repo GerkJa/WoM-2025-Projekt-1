@@ -1,4 +1,4 @@
-API_URL ='http://localhost:8080/' //change later
+API_URL ='https://test-render-sjza.onrender.com/' //change later
 const board = document.getElementById('whiteboard')
 const addNoteBtn = document.getElementById('new-note-btn')
 const logOutBtn = document.getElementById('logOut-btn')

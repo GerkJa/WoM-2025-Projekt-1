@@ -1,4 +1,4 @@
-API_URL ='http://localhost:8080/' //Change later
+API_URL ='https://test-render-sjza.onrender.com/' //Change later
 const form = document.getElementById('loginForm');
 const emailEl = document.getElementById('email');
 const passwordEl = document.getElementById('password');
