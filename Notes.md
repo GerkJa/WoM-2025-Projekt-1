@@ -89,4 +89,5 @@ Extra:
 ## Hur projektet gick:
 Jag tycker att jag gjorde ett ganska bra jobb med stil och logiken samt min frontend design
 Fick inte note id att fungera så jag byggde en annan lösning
-
+Har bara 2 driftsättningar, inloggningen fungerar från samma server som appen
+frontend via people.arcada
