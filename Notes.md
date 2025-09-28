@@ -62,7 +62,7 @@ Note
     - delete lappen med confirm delete? --- Check
 
 Extra:
-    Rita på bakgrunden? tex pilar?
+    Rita på bakgrunden? tex pilar? --- Nej.
 
 ## Backend
 
@@ -71,4 +71,22 @@ Extra:
     - Register new user -- Check
 
 ### Board
-    --- Save notes
+    - Save notes  - check
+    - new note    - check
+    - delete note - check
+    switch boards - fix later?
+
+#### Collab boards  - Fix later? 
+    frontend:
+    - invite button + window
+    - accept invites
+
+    backend:
+    - change board depending on collaborators
+
+
+
+## Hur projektet gick:
+Jag tycker att jag gjorde ett ganska bra jobb med stil och logiken samt min frontend design
+Fick inte note id att fungera så jag byggde en annan lösning
+
