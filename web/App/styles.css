@@ -40,6 +40,13 @@ body {
       color: white;
       cursor: pointer;
 }
+.container-row {
+  display: flex;
+}
+#username {
+  margin-right: 10px;
+  margin-top: 2px;
+}
 
  #whiteboard {
       position: relative;
@@ -83,13 +90,13 @@ body {
         background-color: #fffa87;
     }
     .blue {
-        background-color: rgb(23, 122, 234);
+        background-color: rgb(143, 195, 255);
     }
     .green {
-        background-color: #35eb3b;
+        background-color: #b2ffb5;
     }
     .pink {
-        background-color: rgb(222, 83, 192);
+        background-color: rgba(240, 178, 226, 0.969);
     }
 
     .note textarea {

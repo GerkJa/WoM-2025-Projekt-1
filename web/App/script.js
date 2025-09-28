@@ -1,19 +1,137 @@
-const board = document.getElementById('whiteboard');
+API_URL ='http://localhost:8080/' //change later
+const board = document.getElementById('whiteboard')
 const addNoteBtn = document.getElementById('new-note-btn')
+const logOutBtn = document.getElementById('logOut-btn')
+const usernameField = document.getElementById('username')
+const token = localStorage.getItem("token")
 
-//-- Useful functions
+
+// Useful/UI/UX
+async function getLoginData() {
+const resp = await fetch(`${API_URL}auth/decode`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
+  }
+})
+  const data = await resp.json();
+  usernameField.innerText = data.username
+}
+//-- Load board from DB Logic (API)
+async function getNotes() {
+  const resp = await fetch(`${API_URL}notes`, {
+      method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      }
+  })
+  if (!resp.ok) {
+    console.log("Failed to fetch notes")
+    return
+  }
+  const notesData = await resp.json()
+  console.log(notesData)
+  notesData.forEach(note => loadNote(note));
+}
+
+function loadNote(noteData) {
+  const note = document.createElement("div")
+  note.className = "note"
+  note.id = noteData.unique_id
+  note.style.left = noteData.position_x + "px"
+  note.style.top = noteData.position_y + "px"
+  note.style.backgroundColor = noteData.color
+
+  const btnArea = document.createElement("div");
+  btnArea.className = "note-top";
+  note.appendChild(btnArea);
+
+  const colorBtn = document.createElement("button");
+  colorBtn.className = noteData.color || "yellow";
+  btnArea.appendChild(colorBtn);
+  colorBtn.addEventListener("click", (e) => {
+      const btn = e.currentTarget;
+      const thisNote = btn.closest(".note");
+      const colors = ["yellow", "blue", "green", "pink"];
+      let next = (colors.indexOf(btn.className) + 1) % colors.length;
+      btn.className = colors[next];
+      thisNote.style.backgroundColor = window.getComputedStyle(btn).backgroundColor;
+  });  
+
+  const delBtn = document.createElement("button");
+    delBtn.className = "note-delete-button";
+    btnArea.appendChild(delBtn);
+    delBtn.addEventListener("click", async (e) => {
+      
+      const thisNote = e.currentTarget.parentElement.parentElement;
+      await fetch(`${API_URL}notes/${thisNote.id}`, {
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+    
+    thisNote.remove();
+  });
+
+  const textarea = document.createElement("textarea");
+  textarea.value = noteData.note || "";
+  textarea.placeholder = "Write here...";
+  note.appendChild(textarea);
+
+  makeDraggable(note);
+  board.appendChild(note);
+}
+
+
+
+async function createNoteInDB(noteData) {
+  const resp = await fetch(`${API_URL}notes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    body: JSON.stringify(noteData)
+  })
+  return resp.json()
+}
+
+//pack notes into matrix and send to db
+async function sendNotesToDB() {
+  const notes = saveNotes()
+  await fetch(`${API_URL}notes/updateAll`, {
+      method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({ notes })
+    })
+}
+//-- Save Notes to current board (API)
+function saveNotes() {
+  const noteEls = document.querySelectorAll('.note')
+  return Array.from(noteEls).map(el => ({
+    unique_id: el.id,
+    text: el.querySelector('textarea').value,
+    color: el.style.backgroundColor,
+    x: parseInt(el.style.left, 10) || 0,
+    y: parseInt(el.style.top, 10) || 0
+  }))
+}
+
+getLoginData() //display username in app
+getNotes()
+
+logOutBtn.addEventListener('click', () => {
+  sendNotesToDB();
+  localStorage.clear();
+  window.location.href = '../Login/index.html';
+})
 function generateUniqueId(e) { // Unique ID for elements so they dont clash?
     return e + "_" + Date.now() + "_" + Math.floor(Math.random() * 1000)
 }
-
-function logOut() {
-    localStorage.clear();
-    window.location.reload();
-}
-
-//-- Save Notes to current board (API)
-
-//-- Load board from DB Logic (API)
 
 //-- Switch board with selector, New Board logic, use above
 
@@ -46,13 +164,11 @@ function logOut() {
         const delBtn = document.createElement('button');
         delBtn.className = 'note-delete-button';
         btnArea.appendChild(delBtn);
-        delBtn.addEventListener('click', (e) => {
+        delBtn.addEventListener('click', async (e) => {
             btn = e.currentTarget;
             //-- ADD DB Removal here----------------
             btn.parentElement.parentElement.remove();
             });
-
-        
 
         const textarea = document.createElement('textarea');
         textarea.placeholder = "Write here...";
@@ -60,6 +176,18 @@ function logOut() {
 
         makeDraggable(note);
         board.appendChild(note);
+
+        try {
+          const created = createNoteInDB({
+            text: "",
+            color: "yellow",
+            unique_id: note.id,
+            x: parseInt(note.style.left),
+            y: parseInt(note.style.top)
+          })
+        } catch (error) {
+          console.error("Failed to save note:", err);
+        }
     }
 
     function makeDraggable(el) {
@@ -70,7 +198,7 @@ function logOut() {
         isDragging = true;
         offsetX = e.clientX - el.offsetLeft;
         offsetY = e.clientY - el.offsetTop;
-
+        
         el.style.zIndex = 1000; // bring current to front
 
       });
@@ -93,3 +221,5 @@ function logOut() {
 addNoteBtn.addEventListener('click', () => {
   addNote()
 });
+
+setInterval(sendNotesToDB, 15000)

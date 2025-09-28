@@ -1,3 +1,4 @@
+API_URL ='http://localhost:8080/' //change later
 const form = document.getElementById('loginForm');
 const emailEl = document.getElementById('email');
 const passwordEl = document.getElementById('password');
@@ -47,7 +48,7 @@ form.addEventListener('submit', async (ev) => {
 
   // Connect api here and recieve valid JWT
   try {
-    const resp = await fetch('http://localhost:8080/users/register', { //Temp Localhost link
+    const resp = await fetch(`${API_URL}users/register`, { //Temp Localhost link
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -63,7 +64,7 @@ form.addEventListener('submit', async (ev) => {
       throw new Error(body.message || body.msg);
     }
 
-    const data = await resp.json();
+    const data = await resp.json();   //recieve jwt and reloc
     if (data.token) localStorage.setItem('token', data.token);
     window.location.href = '../App/index.html';
   } catch (e) {

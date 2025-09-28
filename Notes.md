@@ -51,9 +51,9 @@ API I render?
 
 ## App-frontend
 Board: [name] - selectdropdown
-    - Kan välja vilken board man ska jobba med
+    - Kan välja vilken board man ska jobba med -- in progress
 New Note
-    - Skapa en ny note på current board
+    - Skapa en ny note på current board -- check
 Note
     - byta färg på lappen --- Check
     - skriva på lappen --- Check
@@ -63,3 +63,12 @@ Note
 
 Extra:
     Rita på bakgrunden? tex pilar?
+
+## Backend
+
+### User
+    - Login --- Check
+    - Register new user -- Check
+
+### Board
+    --- Save notes
