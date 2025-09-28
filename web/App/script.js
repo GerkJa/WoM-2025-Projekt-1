@@ -40,8 +40,17 @@ function loadNote(noteData) {
   const note = document.createElement("div")
   note.className = "note"
   note.id = noteData.unique_id
-  note.style.left = noteData.position_x + "px"
-  note.style.top = noteData.position_y + "px"
+  //should prevent losing notes?
+  if (noteData.position_x > 1400 || noteData.position_x < 0) {
+    note.style.left = 500 + "px"
+  } else {
+    note.style.left = noteData.position_x + "px"
+  }
+  if (noteData.position_y > 730 || noteData.position_y < 0) {
+    note.style.top = 200 + "px"
+  } else {
+    note.style.top = noteData.position_y + "px"
+  }
   note.style.backgroundColor = noteData.color
 
   const btnArea = document.createElement("div");
