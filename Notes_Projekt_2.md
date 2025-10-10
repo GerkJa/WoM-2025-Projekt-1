@@ -1,19 +1,19 @@
 # Projekt 2 Virtual Board Next Level
 # WebSocket Pastebin
 Del-1 - WebSocket-server
-    - Node.js skapa WebSocket-server (Node ws eller Socket.IO)
-    - Auktorisering med JWT, när uppkoppling skapas
-    - Ingen databas behövs
+    - Node.js skapa WebSocket-server (Node ws eller Socket.IO) --- Check
+    - Auktorisering med JWT, när uppkoppling skapas --- check
+    - Ingen databas behövs --- check
     - Meddelanden skickas till alla uppkopplade klienter
     - Driftsättning i lämplig molntjänst
 
 Del-2 - Enkel browserklient
-    - HTML, JS, CSS frontend till servern
-    - WebSocket kan skrivas i nativ JS eller med Socket.IO klientmodul
-    - Lagra api_key i LocalStorage
-    - Klienten ska kunna anvämndas på flera olika datorer, pastebin ska funka i båda riktningar
+    - HTML, JS, CSS frontend till servern -- check
+    - WebSocket kan skrivas i nativ JS eller med Socket.IO klientmodul --check
+    - Lagra api_key i LocalStorage ?? api-key?
+    - Klienten ska kunna användas på flera olika datorer, pastebin ska funka i båda riktningar
     - Visa status för WevSocket-uppkoppling, "reconnect"-knapp
-    - Om JWT:ns giltighetstid har tagit slut, för det enkelt för användaren att logga in pånytt
+    - Om JWT:ns giltighetstid har tagit slut, gör det enkelt för användaren att logga in pånytt
 
 Del-3 Användarhantering med Refresh Token
 * Man vill inte behöva logga in pånytt helatiden, utan ha lång sessionstid, detta löser man med Refresh Token
